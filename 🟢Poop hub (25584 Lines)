@@ -17620,9 +17620,14 @@ do
 		return v21(arg, table.unpack(v22, 1, v22.n))
 	end
 
-	v21 = hookmetamethod
-	v21 = v21(game, "__namecall", fn_)
-	local v22 = nil
+if hookmetamethod then
+    v21 = hookmetamethod
+    v21 = v21(game, "__namecall", fn_)
+else
+    warn("[PoopHub] hookmetamethod not supported on this executor - Silent Aim disabled")
+    v21 = function(...) return ... end
+end
+local v22 = nil
 	local grabParts = game:GetService("ReplicatedFirst"):FindFirstChild("GrabParts")
 
 	GrabPartFake = function(part1)
